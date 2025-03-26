@@ -8,7 +8,9 @@ const JWT_SECRET='your_jwt_secret'
 const corsOptions={
     origin:"*",
     credentials:true,
-    optionsSuccessStatus:200
+    optionsSuccessStatus:200,
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 }
 app.use(cors(corsOptions))
 const verifyJWT=(req,res,next)=>{
