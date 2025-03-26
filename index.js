@@ -16,8 +16,6 @@ const corsOptions = {
 // Apply CORS middleware
 app.use(cors(corsOptions));
 
-// Handle preflight requests for all routes
-app.options('*', cors(corsOptions));
 app.use(express.json())
 
 const SECRET_KEY = "supersecretadmin";
