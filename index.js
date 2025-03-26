@@ -20,6 +20,16 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.use(express.json())
 // Rest of your existing code remains the same...
+app.use(bodyParser.json({
+    limit: '10mb', // Limit payload size
+    verify: (req, res, buf) => {
+        try {
+            JSON.parse(buf.toString());
+        } catch (e) {
+            throw new SyntaxError('Invalid JSON');
+        }
+    }
+}));
 const SECRET_KEY = "supersecretadmin";
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
