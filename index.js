@@ -10,8 +10,10 @@ const verifyJWT=(req,res,next)=>{
         return res.status(401).json({message:"No token provided"})
     }
     try {
-    //  const decodedtOKEN=jwt.verify(token)
-     console.log(token)   
+     const decodedtOKEN=jwt.verify(token,JWT_SECRET)
+     res.user=decodedtOKEN
+     next()
+    
     }catch(error){
         return res.status(402).json({message:"Invalid Token"})
     }
@@ -25,7 +27,9 @@ app.post("/admin/login",(req,res)=>{
         res.json({message:"Invalid Secret"})
     }
 })
-
+app.get('/admin/api/data',verifyJWT,(req,res)=>{
+    res.json({message:"Protected route accessible"})
+})
 app.listen(5000,()=>{
     console.log("App Running at port 5000")
 })
