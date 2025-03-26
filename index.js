@@ -18,7 +18,7 @@ app.use(cors(corsOptions));
 
 // Handle preflight requests for all routes
 app.options('*', cors(corsOptions));
-
+app.use(express.json())
 // Rest of your existing code remains the same...
 const SECRET_KEY = "supersecretadmin";
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
