@@ -1,9 +1,16 @@
 const express=require("express")
+const cors=require("cors")
 const jwt=require("jsonwebtoken")
 const app=express()
 app.use(express.json())
 const SECRET_KEY="supersecretadmin"
 const JWT_SECRET='your_jwt_secret'
+const corsOptions={
+    origin:"*",
+    credentials:true,
+    optionsSuccessStatus:200
+}
+app.use(cors(corsOptions))
 const verifyJWT=(req,res,next)=>{
     const token=req.headers['authorization']//we will pass headers in the fronend that will contain key as 'authorization
     if(!token){
